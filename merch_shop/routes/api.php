@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsApiController;
 use App\Http\Controllers\PageApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('pages', PageApiController::class)->only([
+    'index',
+    'show',
+]);
+
+Route::apiResource('news', NewsApiController::class)->only([
     'index',
     'show',
 ]);
