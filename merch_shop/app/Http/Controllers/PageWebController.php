@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Page;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,8 @@ class PageWebController extends Controller
      */
     public function index()
     {
-        $pages = DB::table('pages')->paginate(5);
+
+        $pages = Page::query()->paginate(5);
         return view('pages', ['pages' => $pages]);
     }
     /**

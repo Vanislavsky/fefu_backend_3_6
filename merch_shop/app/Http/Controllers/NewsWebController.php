@@ -15,7 +15,8 @@ class NewsWebController extends Controller
      */
     public function index()
     {
-        $news_list = DB::table('news')->paginate(5);
+
+        $news_list = News::query()->published()->paginate(5);
         return view('news_list', ['news_list' => $news_list]);
     }
     /**

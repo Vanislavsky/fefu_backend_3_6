@@ -8,9 +8,7 @@
 @foreach ($news_list as $news)
     <h1>{{ $news->title }}</h1>
     <p>{{ $news->text }}</p>
-    @isset($news->published_at)
-        <p align="right">{{ $news->published_at }}</p>
-    @endisset
+    <p align="right">{{ $news->published_at }}</p>
 @endforeach
 
 {{ $news_list->links() }}
