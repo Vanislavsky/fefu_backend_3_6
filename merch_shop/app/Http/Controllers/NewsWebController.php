@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\Page;
-use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PageWebController extends Controller
+class NewsWebController extends Controller
 {
     /**
      *
@@ -17,8 +16,8 @@ class PageWebController extends Controller
     public function index()
     {
 
-        $pages = Page::query()->paginate(5);
-        return view('pages', ['pages' => $pages]);
+        $news_list = News::query()->published()->paginate(5);
+        return view('news_list', ['news_list' => $news_list]);
     }
     /**
      * Handle the incoming request.
@@ -28,13 +27,13 @@ class PageWebController extends Controller
      */
     public function show(Request $request, string $slug)
     {
-        $page = Page::query()
+        $news = News::query()
             ->where('slug', $slug)
             ->first();
 
-        if ($page === null)
+        if ($news === null)
             abort(404);
 
-        return view('page', ['page' => $page]);
+        return view('news', ['news' => $news]);
     }
 }
