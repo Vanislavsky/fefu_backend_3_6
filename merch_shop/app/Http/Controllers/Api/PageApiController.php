@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Web\Controller;
 use App\Http\Resources\PageResource;
 use App\Models\Page;
 use App\OpenApi\Responses\ListPageResponse;

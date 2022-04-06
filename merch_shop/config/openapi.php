@@ -32,6 +32,10 @@ return [
                     'name' => 'news',
                     'description' => 'News',
                 ],
+                [
+                    'name' => 'appeal',
+                    'description' => 'Appeal',
+                ],
 
             ],
 

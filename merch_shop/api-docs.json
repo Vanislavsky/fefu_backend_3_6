@@ -153,10 +153,99 @@
                     }
                 }
             }
+        },
+        "\/api\/appeal": {
+            "post": {
+                "tags": [
+                    "appeal"
+                ],
+                "summary": "Display the specified resource",
+                "requestBody": {
+                    "description": "Appeal data",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/Appeal"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "appeal record created",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/SuccessAppeal"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorAppeal"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "Appeal": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ErrorAppeal": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "phone": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "News": {
                 "type": "object",
                 "properties": {
@@ -252,6 +341,14 @@
                         }
                     }
                 }
+            },
+            "SuccessAppeal": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
             }
         }
     },
@@ -263,6 +360,10 @@
         {
             "name": "news",
             "description": "News"
+        },
+        {
+            "name": "appeal",
+            "description": "Appeal"
         }
     ]
 }

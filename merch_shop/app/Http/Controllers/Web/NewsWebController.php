@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Models\News;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use function abort;
+use function view;
 
 class NewsWebController extends Controller
 {

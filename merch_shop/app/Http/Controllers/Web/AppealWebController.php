@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\AppealFormRequest;
 use App\Models\Appeal;
 use App\Sanitizers\PhoneSanitizer;
-use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class AppealWebController extends Controller
 {
