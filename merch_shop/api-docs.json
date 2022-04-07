@@ -160,16 +160,42 @@
                     "appeal"
                 ],
                 "summary": "Display the specified resource",
-                "requestBody": {
-                    "description": "Appeal data",
-                    "content": {
-                        "application\/json": {
-                            "schema": {
-                                "$ref": "#\/components\/schemas\/Appeal"
-                            }
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 100
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "mail",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 1000
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "appeal record created",
@@ -197,23 +223,6 @@
     },
     "components": {
         "schemas": {
-            "Appeal": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "phone": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    }
-                }
-            },
             "ErrorAppeal": {
                 "type": "object",
                 "properties": {

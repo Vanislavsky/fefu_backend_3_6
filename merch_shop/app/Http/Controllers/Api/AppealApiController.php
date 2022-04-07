@@ -24,9 +24,9 @@ class AppealApiController extends Controller
      * @return Responsable
      */
     #[OpenApi\Operation(tags: ['appeal'])]
+    #[OpenApi\Parameters(factory: AppealParameters::class)]
     #[OpenApi\Response(factory: SuccessCreatedAppealResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: ErrorCreatedAppealResponse::class, statusCode: 422)]
-    #[OpenApi\RequestBody(factory: AppealRequestBody::class)]
     public function send(AppealFormRequest $request)
     {
         $data = $request->validated();
