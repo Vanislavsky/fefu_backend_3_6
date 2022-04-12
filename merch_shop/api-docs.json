@@ -179,7 +179,7 @@
                         }
                     },
                     {
-                        "name": "mail",
+                        "name": "email",
                         "in": "query",
                         "required": false,
                         "schema": {

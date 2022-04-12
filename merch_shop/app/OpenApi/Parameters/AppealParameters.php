@@ -25,7 +25,7 @@ class AppealParameters extends ParametersFactory
                 ->required(false)
                 ->schema(Schema::string()),
             Parameter::query()
-                ->name('mail')
+                ->name('email')
                 ->required(false)
                 ->schema(Schema::string()),
             Parameter::query()
