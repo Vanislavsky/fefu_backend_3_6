@@ -33,8 +33,8 @@ class AppealApiController extends Controller
 
         $appeal = new Appeal();
         $appeal->name = $data['name'];
-        $appeal->phone = PhoneSanitizer::sanitize($data['phone']);
-        $appeal->email = $data['email'];
+        $appeal->phone = PhoneSanitizer::sanitize($data['phone'] ?? null);
+        $appeal->email = $data['email'] ?? null;
         $appeal->message = $data['message'];
         $appeal->save();
 
