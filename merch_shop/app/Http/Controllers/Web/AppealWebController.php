@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\AppealFormRequest;
+use App\Http\Requests\AppealWebFormRequest;
 use App\Models\Appeal;
 use App\Sanitizers\PhoneSanitizer;
 use function redirect;
@@ -15,7 +15,7 @@ class AppealWebController extends Controller
         return view('appeal', ['success' => session('success', false)]);
     }
 
-    public function send(AppealFormRequest $request)
+    public function send(AppealWebFormRequest $request)
     {
         $data = $request->validated();
 

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AppealFormRequest extends FormRequest
+class AppealWebFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,23 +33,4 @@ class AppealFormRequest extends FormRequest
         ];
     }
 
-    /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $errors = $validator->errors();
-
-        $response = response()->json([
-            'message' => 'Invalid data send',
-            'details' => $errors->messages(),
-        ], 422);
-
-        throw new HttpResponseException($response);
-    }
 }

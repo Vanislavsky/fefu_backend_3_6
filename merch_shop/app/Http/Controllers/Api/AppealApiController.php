@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
-use App\Http\Requests\AppealFormRequest;
+use App\Http\Requests\AppealApiFormRequest;
 use App\Models\Appeal;
 use App\OpenApi\Parameters\AppealParameters;
 use App\OpenApi\RequestBodies\AppealRequestBody;
@@ -20,14 +20,14 @@ class AppealApiController extends Controller
     /**
      * Display the specified resource
      *
-     * @param AppealFormRequest
+     * @param AppealApiFormRequest
      * @return Responsable
      */
     #[OpenApi\Operation(tags: ['appeal'])]
     #[OpenApi\Parameters(factory: AppealParameters::class)]
     #[OpenApi\Response(factory: SuccessCreatedAppealResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: ErrorCreatedAppealResponse::class, statusCode: 422)]
-    public function send(AppealFormRequest $request)
+    public function send(AppealApiFormRequest $request)
     {
         $data = $request->validated();
 
