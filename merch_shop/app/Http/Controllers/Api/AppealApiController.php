@@ -18,7 +18,7 @@ use function response;
 class AppealApiController extends Controller
 {
     /**
-     * Display the specified resource
+     * Send appeal
      *
      * @param AppealApiFormRequest
      * @return Responsable

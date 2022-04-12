@@ -159,7 +159,7 @@
                 "tags": [
                     "appeal"
                 ],
-                "summary": "Display the specified resource",
+                "summary": "Send appeal",
                 "parameters": [
                     {
                         "name": "name",
