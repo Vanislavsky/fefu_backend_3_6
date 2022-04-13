@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Web\Controller;
 use App\Http\Resources\NewsResources;
 use App\Models\News;
 use App\OpenApi\Responses\ListNewsResponse;

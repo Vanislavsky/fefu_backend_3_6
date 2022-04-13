@@ -153,10 +153,108 @@
                     }
                 }
             }
+        },
+        "\/api\/appeal": {
+            "post": {
+                "tags": [
+                    "appeal"
+                ],
+                "summary": "Send appeal",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 100
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 1000
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "appeal record created",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/SuccessAppeal"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorAppeal"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "ErrorAppeal": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "phone": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "News": {
                 "type": "object",
                 "properties": {
@@ -252,6 +350,14 @@
                         }
                     }
                 }
+            },
+            "SuccessAppeal": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
             }
         }
     },
@@ -263,6 +369,10 @@
         {
             "name": "news",
             "description": "News"
+        },
+        {
+            "name": "appeal",
+            "description": "Appeal"
         }
     ]
 }
