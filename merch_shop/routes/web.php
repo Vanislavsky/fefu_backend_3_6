@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfileWebController;
 use App\Http\Controllers\Web\AppealWebController;
+use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\NewsWebController;
 use App\Http\Controllers\Web\PageWebController;
+use App\Http\Controllers\Web\ProfileWebController;
 use Illuminate\Support\Facades\Route;
 
 /*

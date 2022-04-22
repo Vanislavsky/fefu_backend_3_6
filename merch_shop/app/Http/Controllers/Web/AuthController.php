@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Web\Controller;
 use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterFormRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function back;
+use function redirect;
+use function view;
 
 class AuthController extends Controller
 {
@@ -50,12 +51,7 @@ class AuthController extends Controller
     public function register(RegisterFormRequest $request)
     {
         $data = $request->validated();
-
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = Hash::make($data['password']);
-        $user->save();
+        $user = User::createFromRequest($data);
 
         Auth::login($user);
         $request->session()->regenerate();
