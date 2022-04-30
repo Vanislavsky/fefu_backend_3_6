@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\Web\AppealWebController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\NewsWebController;
@@ -40,3 +41,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [AuthController::class, 'regiserForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
+Route::prefix('oauth')->group(function () {
+    Route::get('/{provider}/redirect', [OAuthController::class, 'redirectToservice'])->name('oauth.redirect');
+    Route::get('/{provider}/login', [OAuthController::class, 'login'])->name('oauth.login');
+});

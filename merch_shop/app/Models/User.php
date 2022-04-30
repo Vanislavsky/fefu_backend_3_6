@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'vkontakte_id',
+        'vkontakte_logged_in_at',
+        'vkontakte_registered_at',
     ];
 
     /**
@@ -32,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'vkontakte_id',
     ];
 
     /**
@@ -41,6 +45,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'vkontakte_logged_in_at' => 'datetime',
+        'vkontakte_registered_at' => 'datetime',
     ];
 
     public static function createFromRequest(array $data) : User
