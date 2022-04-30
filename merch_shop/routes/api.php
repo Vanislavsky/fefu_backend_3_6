@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\AppealApiController;
+use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\NewsApiController;
 use App\Http\Controllers\Api\PageApiController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('register', [AuthApiController::class, 'register']);
+Route::post('login', [AuthApiController::class, 'login']);
+Route::middleware('auth:sanctum')->get('/user', [UserApiController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthApiController::class, 'logout']);
 
 Route::apiResource('pages', PageApiController::class)->only([
     'index',
@@ -32,3 +34,4 @@ Route::apiResource('news', NewsApiController::class)->only([
 ]);
 
 Route::post('appeal', [AppealApiController::class, 'send']);
+

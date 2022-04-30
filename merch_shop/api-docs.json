@@ -10,6 +10,155 @@
         }
     ],
     "paths": {
+        "\/api\/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "appeal record created",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/SuccessLogin"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid login",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorLogin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "appeal record created",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/SuccessLogin"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid login",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorLogin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/user": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Display user",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/User"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "success logout",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/SuccessLogout"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "\/api\/pages": {
             "get": {
                 "tags": [
@@ -255,6 +404,31 @@
                     }
                 }
             },
+            "ErrorLogin": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "News": {
                 "type": "object",
                 "properties": {
@@ -358,6 +532,42 @@
                         "type": "string"
                     }
                 }
+            },
+            "SuccessLogin": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "SuccessLogout": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "email_verified_at": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    }
+                }
             }
         }
     },
@@ -373,6 +583,14 @@
         {
             "name": "appeal",
             "description": "Appeal"
+        },
+        {
+            "name": "auth",
+            "description": "Auth"
+        },
+        {
+            "name": "user",
+            "description": "User"
         }
     ]
 }
