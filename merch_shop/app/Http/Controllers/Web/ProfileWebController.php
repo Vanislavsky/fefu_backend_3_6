@@ -11,6 +11,9 @@ class ProfileWebController extends Controller
 {
     public function show(Request $request)
     {
-        return view('profile', ['user' => (new UserResource(Auth::user()))->toArray($request), 'login_way' => session('login_way', 'app')]);
+        return view('profile', [
+            'user' => (new UserResource(Auth::user()))->toArray($request),
+            'login_way' => session('login_way', 'app')
+        ]);
     }
 }
