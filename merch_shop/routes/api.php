@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AppealApiController;
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\CatalogApiController;
 use App\Http\Controllers\Api\NewsApiController;
 use App\Http\Controllers\Api\PageApiController;
 use App\Http\Controllers\Api\UserApiController;
@@ -29,6 +30,11 @@ Route::apiResource('pages', PageApiController::class)->only([
 ]);
 
 Route::apiResource('news', NewsApiController::class)->only([
+    'index',
+    'show',
+]);
+
+Route::apiResource('catalog', CatalogApiController::class)->only([
     'index',
     'show',
 ]);

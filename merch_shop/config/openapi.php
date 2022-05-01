@@ -44,6 +44,10 @@ return [
                     'name' => 'user',
                     'description' => 'User',
                 ],
+                [
+                    'name' => 'catalog',
+                    'description' => 'Catalog',
+                ],
 
             ],
 
