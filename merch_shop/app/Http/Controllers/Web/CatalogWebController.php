@@ -23,11 +23,6 @@ class CatalogWebController extends Controller
             $query->where('slug', $slug);
         }
 
-        $categories = ProductCategory::query()
-            ->with('children')
-            ->where('parent_id')
-            ->get();
-
         return view('catalog.catalog', ['categories' => $query->get()]);
     }
 }

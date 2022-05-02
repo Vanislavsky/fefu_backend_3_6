@@ -34,7 +34,7 @@ Route::apiResource('news', NewsApiController::class)->only([
     'show',
 ]);
 
-Route::apiResource('catalog', CatalogApiController::class)->only([
+Route::apiResource('product_category', CatalogApiController::class)->only([
     'index',
     'show',
 ]);
