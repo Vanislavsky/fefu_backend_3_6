@@ -89,6 +89,6 @@ class OAuthController extends Controller
         Auth::login($appAuthUser);
         $request->session()->regenerate();
 
-        return redirect(route('profile'))->with('login_way', $provider);
+        return redirect(route('profile'));
     }
 }
