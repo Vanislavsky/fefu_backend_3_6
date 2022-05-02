@@ -27,9 +27,9 @@ class RegisterFormRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required'],
-        ];
-    }
+                'password' => ['required'],
+            ];
+        }
 
     /**
      * Configure the validator instance.
@@ -42,12 +42,11 @@ class RegisterFormRequest extends FormRequest
         $validator->after(function ($validator) {
             $user = User::query()
                 ->where('email', $this->request->get('email'))
+                ->whereNull('app_registered_at')
                 ->first();
 
-            if ($user !== null) {
-                if ($user->app_registered_at != null) {
-                    $validator->errors()->add('email', 'this email is already registered');
-                }
+            if ($user === null) {
+                $validator->errors()->add('email', 'this email is already registered');
             }
         });
     }
