@@ -28,8 +28,6 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('email')->nullable(false)->change();
-            $table->string('password')->nullable(false)->change();
             $table->dropColumn(['google_id', 'google_logged_in_at', 'google_registered_at']);
         });
     }
