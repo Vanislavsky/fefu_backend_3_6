@@ -33,6 +33,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             $user->app_logged_in_at = Carbon::now();
+            $user->save();
             return redirect(route('profile'));
         }
 
@@ -62,7 +63,7 @@ class AuthController extends Controller
             $user->password = Hash::make($data['password']);;
             $user->app_logged_in_at = Carbon::now();
             $user->app_registered_at = Carbon::now();
-            $user->update();
+            $user->save();
         } else {
             $user = User::createFromRequest($data);
         }
