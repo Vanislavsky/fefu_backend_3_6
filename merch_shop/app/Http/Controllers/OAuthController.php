@@ -15,6 +15,7 @@ use Throwable;
 class OAuthController extends Controller
 {
     private const ALLOWED_PROVIDERS = ['vkontakte', 'google'];
+
     public function getValidatedProvider(string $provider)
     {
         if(!in_array($provider, self::ALLOWED_PROVIDERS, true))
