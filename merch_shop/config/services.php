@@ -34,13 +34,14 @@ return [
     'vkontakte' => [
         'client_id' => env('VKONTAKTE_CLIENT_ID'),
         'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost/oauth/vkontakte/login',
+        'redirect' => env('VKONTAKTE_REDIRECT_URI'),
         'scopes' => ['read:user']
     ],
 
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost/oauth/google/login',
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'scopes' => ['read:user']
     ],
 ];
