@@ -42,10 +42,10 @@ class RegisterFormRequest extends FormRequest
         $validator->after(function ($validator) {
             $user = User::query()
                 ->where('email', $this->request->get('email'))
-                ->whereNull('app_registered_at')
+                ->whereNotNull('app_registered_at')
                 ->first();
 
-            if ($user === null) {
+            if ($user !== null) {
                 $validator->errors()->add('email', 'this email is already registered');
             }
         });
