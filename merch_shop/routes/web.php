@@ -3,6 +3,7 @@
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\Web\AppealWebController;
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\CatalogWebController;
 use App\Http\Controllers\Web\NewsWebController;
 use App\Http\Controllers\Web\PageWebController;
 use App\Http\Controllers\Web\ProfileWebController;
@@ -23,6 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/catalog/{slug?}', [CatalogWebController::class, 'index'])->name('catalog');
 Route::get('/pages', [PageWebController::class, 'index']);
 Route::get('/pages/{slug}', [PageWebController::class, 'show']);
 Route::get('/news', [NewsWebController::class, 'index']);

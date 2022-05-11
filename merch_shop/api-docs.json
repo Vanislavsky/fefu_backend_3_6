@@ -303,6 +303,78 @@
                 }
             }
         },
+        "\/api\/catalog": {
+            "get": {
+                "tags": [
+                    "catalog"
+                ],
+                "summary": "Display a listing of the resource",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Catalog"
+                                            }
+                                        },
+                                        "list": {
+                                            "$ref": "#\/components\/schemas\/PaginatorLinks"
+                                        },
+                                        "meta": {
+                                            "$ref": "#\/components\/schemas\/PaginatorMeta"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/catalog\/{catalog}": {
+            "get": {
+                "tags": [
+                    "catalog"
+                ],
+                "summary": "Display the specified resource",
+                "parameters": [
+                    {
+                        "name": "catalog",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/ProductCategory"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
         "\/api\/appeal": {
             "post": {
                 "tags": [
@@ -372,6 +444,21 @@
     },
     "components": {
         "schemas": {
+            "Catalog": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "parent_id": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                }
+            },
             "ErrorAppeal": {
                 "type": "object",
                 "properties": {
@@ -525,6 +612,20 @@
                     }
                 }
             },
+            "ProductCategory": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "parent_id": {
+                        "type": "integer"
+                    }
+                }
+            },
             "SuccessAppeal": {
                 "type": "object",
                 "properties": {
@@ -591,6 +692,10 @@
         {
             "name": "user",
             "description": "User"
+        },
+        {
+            "name": "catalog",
+            "description": "Catalog"
         }
     ]
 }
