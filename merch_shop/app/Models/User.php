@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +23,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'vkontakte_id',
+        'vkontakte_logged_in_at',
+        'vkontakte_registered_at',
+        'google_id',
+        'google_logged_in_at',
+        'google_registered_at',
+        'app_logged_in_at',
+        'app_registered_at',
     ];
 
     /**
@@ -32,6 +41,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'vkontakte_id',
+        'google_id',
     ];
 
     /**
@@ -41,6 +52,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'vkontakte_logged_in_at' => 'datetime',
+        'vkontakte_registered_at' => 'datetime',
+        'google_logged_in_at'=> 'datetime',
+        'google_registered_at'=> 'datetime',
+        'app_logged_in_at'=> 'datetime',
+        'app_registered_at'=> 'datetime',
     ];
 
     public static function createFromRequest(array $data) : User
@@ -49,6 +66,8 @@ class User extends Authenticatable
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
+        $user->app_logged_in_at = Carbon::now();
+        $user->app_registered_at = Carbon::now();
         $user->save();
 
         return $user;
