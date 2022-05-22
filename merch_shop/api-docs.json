@@ -303,7 +303,7 @@
                 }
             }
         },
-        "\/api\/catalog": {
+        "\/api\/product_category": {
             "get": {
                 "tags": [
                     "catalog"
@@ -337,7 +337,7 @@
                 }
             }
         },
-        "\/api\/catalog\/{catalog}": {
+        "\/api\/product_category\/{product_category}": {
             "get": {
                 "tags": [
                     "catalog"
@@ -345,7 +345,7 @@
                 "summary": "Display the specified resource",
                 "parameters": [
                     {
-                        "name": "catalog",
+                        "name": "product_category",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -437,6 +437,79 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "\/api\/catalog\/products\/list": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Display a listing of the resource",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Page"
+                                            }
+                                        },
+                                        "list": {
+                                            "$ref": "#\/components\/schemas\/PaginatorLinks"
+                                        },
+                                        "meta": {
+                                            "$ref": "#\/components\/schemas\/PaginatorMeta"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/catalog\/products\/details\/{slug}": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Display the specified resource",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/Page"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
@@ -537,13 +610,14 @@
             "Page": {
                 "type": "object",
                 "properties": {
-                    "title": {
+                    "name": {
                         "type": "string"
                     },
-                    "slug": {
+                    "description": {
                         "type": "string"
                     },
-                    "text": {
+                    "price": {
+                        "format": "double",
                         "type": "string"
                     }
                 }
@@ -696,6 +770,10 @@
         {
             "name": "catalog",
             "description": "Catalog"
+        },
+        {
+            "name": "product",
+            "description": "Product"
         }
     ]
 }

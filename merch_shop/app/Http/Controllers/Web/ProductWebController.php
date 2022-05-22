@@ -19,8 +19,6 @@ class ProductWebController extends Controller
             abort(404);
         }
 
-
-
         return view('product.index', ['product' => $product]);
     }
 }
