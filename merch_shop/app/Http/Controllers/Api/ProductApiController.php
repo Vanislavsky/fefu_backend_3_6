@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
+use App\Http\Resources\ProductCategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -23,15 +24,20 @@ class ProductApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['product'])]
     #[OpenApi\Response(factory: ListProductResponse::class, statusCode: 200)]
-    public function index(Request $request)
+    public function index(string $slug = null)
     {
         $query = ProductCategory::query()->with('children', 'products');
+
+        if ($slug === null) {
+            $query->where('parent_id');
+        } else {
+            $query->where('slug', $slug);
+        }
 
         $categories = $query->get();
         $products = ProductCategory::getTreeProductsBuilder($categories)
             ->orderBy('id')
             ->paginate();
-
         return ProductResource::collection(
             $products
         );
