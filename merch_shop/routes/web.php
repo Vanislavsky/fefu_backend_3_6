@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CatalogWebController;
 use App\Http\Controllers\Web\NewsWebController;
 use App\Http\Controllers\Web\PageWebController;
+use App\Http\Controllers\Web\ProductWebController;
 use App\Http\Controllers\Web\ProfileWebController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/catalog/product/{slug}', [ProductWebController::class, 'index'])->name('product');
 Route::get('/catalog/{slug?}', [CatalogWebController::class, 'index'])->name('catalog');
 Route::get('/pages', [PageWebController::class, 'index']);
 Route::get('/pages/{slug}', [PageWebController::class, 'show']);
