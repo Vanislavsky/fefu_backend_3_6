@@ -28,14 +28,14 @@ class Product extends Model
 
     public function attributeValues(): HasMany
     {
-        return $this->hasMany(ProductAtributeValue::class);
+        return $this->hasMany(ProductAttributeValue::class);
     }
 
     public function sortedAttributeValues(): HasMany
     {
         return $this
             ->attributeValues()
-            ->join('product_attributes', 'product_attributes.id', '=', 'product_atribute_values.product_attribute_id')
+            ->join('product_attributes', 'product_attributes.id', '=', 'product_attribute_values.product_attribute_id')
             ->orderBy('product_attributes.sort_order')
             ->orderBy('product_attributes.id');
     }

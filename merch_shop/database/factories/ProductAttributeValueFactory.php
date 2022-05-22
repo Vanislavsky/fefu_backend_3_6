@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductAtributeValue>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductAttributeValue>
  */
-class ProductAtributeValueFactory extends Factory
+class ProductAttributeValueFactory extends Factory
 {
     /**
      * Define the model's default state.

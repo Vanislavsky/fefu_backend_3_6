@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\ProductAtributeValue;
+use App\Models\ProductAttributeValue;
 use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use Faker\Generator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductAtributeValueSeeder extends Seeder
+class ProductAttributeValueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class ProductAtributeValueSeeder extends Seeder
      */
     public function run()
     {
-        ProductAtributeValue::query()->delete();
+        ProductAttributeValue::query()->delete();
 
         $products = Product::get();
         $attributes = ProductAttribute::get();
@@ -35,7 +35,7 @@ class ProductAtributeValueSeeder extends Seeder
         foreach ($products as $product) {
             foreach ($attributesIdsByCategoryId[$product->product_category_id] as $attribute) {
                 if ($faker->boolean(90)) {
-                    ProductAtributeValue::factory()->product($product->id)->attribute($attribute)->create();
+                    ProductAttributeValue::factory()->product($product->id)->attribute($attribute)->create();
                 }
             }
         }
