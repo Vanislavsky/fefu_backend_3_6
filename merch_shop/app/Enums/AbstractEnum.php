@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-class AbstractEnum
+abstract class AbstractEnum
 {
     public static function getConstants(): array
     {
