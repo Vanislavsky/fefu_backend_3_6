@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
 use App\Http\Resources\CompleteProductResource;
+use App\OpenApi\Responses\EmptyCategoriesResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\AbbreviatedProductResource;
 use App\Models\Product;
@@ -24,9 +25,10 @@ class ProductApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['product'])]
     #[OpenApi\Response(factory: ListProductResponse::class, statusCode: 200)]
+    #[OpenApi\Response(factory: EmptyCategoriesResponse::class, statusCode: 422)]
     public function index(Request $request)
     {
-        $slug = $request->query('product_slug');
+        $slug = $request->query('category_slug');
         $query = ProductCategory::query()->with('children', 'products');
 
         if ($slug === null) {
@@ -41,7 +43,9 @@ class ProductApiController extends Controller
                 ->orderBy('id')
                 ->paginate();
         } catch (\Exception $exception) {
-            abort(422, $exception->getMessage());
+            return response()->json([
+                'message' => $exception->getMessage()
+            ], 422);
         }
         return AbbreviatedProductResource::collection(
             $products
