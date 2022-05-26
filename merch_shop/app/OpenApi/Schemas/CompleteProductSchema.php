@@ -22,6 +22,13 @@ class CompleteProductSchema extends SchemaFactory
                 Schema::string('name'),
                 Schema::string('price')->format(Schema::FORMAT_DOUBLE),
                 Schema::string('description'),
+                ProductCategorySchema::ref('category'),
+                Schema::array('attributes')->items(
+                    Schema::object()->properties(
+                        Schema::string('name'),
+                        Schema::string('value')
+                    )
+                )
             );
     }
 }
