@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
-use App\Http\Resources\ProductCategoryResource;
+use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -23,8 +23,9 @@ class ProductApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['product'])]
     #[OpenApi\Response(factory: ListProductResponse::class, statusCode: 200)]
-    public function index(string $slug = null)
+    public function index(Request $request)
     {
+        $slug = $request->query('product_slug');
         $query = ProductCategory::query()->with('children', 'products');
 
         if ($slug === null) {
@@ -55,8 +56,9 @@ class ProductApiController extends Controller
     #[OpenApi\Operation(tags: ['product'])]
     #[OpenApi\Response(factory: ShowProductResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
-    public function show(string $slug)
+    public function show(Request $request)
     {
+        $slug = $request->query('product_slug');
         $product = Product::query()
             ->with('productCategory', 'sortedAttributeValues.productAttribute')
             ->where('slug', $slug)

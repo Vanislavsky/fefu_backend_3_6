@@ -43,7 +43,7 @@ Route::apiResource('product_category', CatalogApiController::class)->only([
 Route::post('appeal', [AppealApiController::class, 'send']);
 
 Route::prefix('catalog')->group(function () {
-    Route::get('products/list/{slug?}', [ProductApiController::class, 'index']);
-    Route::get('products/details/{slug}', [ProductApiController::class, 'show']);
+    Route::get('products/list', [ProductApiController::class, 'index']);
+    Route::get('products/details', [ProductApiController::class, 'show']);
 });
 
