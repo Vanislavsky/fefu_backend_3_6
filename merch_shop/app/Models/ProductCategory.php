@@ -34,6 +34,9 @@ class ProductCategory extends Model
 
     public static function getTreeProductsBuilder(Collection $categories): Builder
     {
+        if ($categories->isEmpty()) {
+            throw new \Exception('categories is empty');
+        }
         $categoryIds = [];
         $collectCategoryIds = function (ProductCategory $category) use (&$categoryIds, &$collectCategoryIds) {
             $categoryIds[] = $category->id;

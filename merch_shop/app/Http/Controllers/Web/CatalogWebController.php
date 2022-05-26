@@ -25,9 +25,13 @@ class CatalogWebController extends Controller
         }
 
         $categories = $query->get();
-        $products = ProductCategory::getTreeProductsBuilder($categories)
-            ->orderBy('id')
-            ->paginate();
+        try {
+            $products = ProductCategory::getTreeProductsBuilder($categories)
+                ->orderBy('id')
+                ->paginate();
+        } catch (\Exception $exception) {
+            abort(422, $exception->getMessage());
+        }
         return view('catalog.catalog', ['categories' => $categories, 'products' => $products]);
     }
 }

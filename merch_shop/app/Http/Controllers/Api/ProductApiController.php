@@ -11,7 +11,6 @@ use App\OpenApi\Responses\ListProductResponse;
 use App\OpenApi\Responses\NotFoundResponse;
 use App\OpenApi\Responses\ShowProductResponse;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Request;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
 #[OpenApi\PathItem]
@@ -35,9 +34,13 @@ class ProductApiController extends Controller
         }
 
         $categories = $query->get();
-        $products = ProductCategory::getTreeProductsBuilder($categories)
-            ->orderBy('id')
-            ->paginate();
+        try {
+            $products = ProductCategory::getTreeProductsBuilder($categories)
+                ->orderBy('id')
+                ->paginate();
+        } catch (\Exception $exception) {
+            abort(422, $exception->getMessage());
+        }
         return ProductResource::collection(
             $products
         );
