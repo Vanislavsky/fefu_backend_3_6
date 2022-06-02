@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\CatalogApiController;
 use App\Http\Controllers\Api\NewsApiController;
 use App\Http\Controllers\Api\PageApiController;
+use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +41,9 @@ Route::apiResource('product_category', CatalogApiController::class)->only([
 ]);
 
 Route::post('appeal', [AppealApiController::class, 'send']);
+
+Route::prefix('catalog')->group(function () {
+    Route::get('products/list', [ProductApiController::class, 'index']);
+    Route::get('products/details', [ProductApiController::class, 'show']);
+});
 

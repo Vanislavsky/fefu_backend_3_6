@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             NewsSeeder::class,
             ProductCategorySeeder::class,
+            ProductAttributeSeeder::class,
+            ProductSeeder::class,
+            ProductAttributeValueSeeder::class,
         ]);
     }
 }

@@ -10,6 +10,17 @@
 <div>
     Каталог
     @include('catalog.catalog_list', ['categories', $categories])
+
+    @foreach ($products as $product)
+        <article>
+            <a href="{{ route('product', $product->slug) }}">
+                <h3>{{ $product->name }}</h3>
+            </a>
+            <p>{{ $product->price }} руб.</p>
+        </article>
+    @endforeach
+
+    {{ $products->links() }}
 </div>
 </body>
 </html>
