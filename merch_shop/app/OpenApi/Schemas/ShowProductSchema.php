@@ -11,7 +11,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 use Vyuldashev\LaravelOpenApi\Factories\SchemaFactory;
 
-class AbbreviatedProductSchema extends SchemaFactory implements Reusable
+class ShowProductSchema extends SchemaFactory implements Reusable
 {
     /**
      * @return AllOf|OneOf|AnyOf|Not|Schema
@@ -21,8 +21,15 @@ class AbbreviatedProductSchema extends SchemaFactory implements Reusable
         return Schema::object('Product')
             ->properties(
                 Schema::string('name'),
-                Schema::string('slug'),
                 Schema::string('price')->format(Schema::FORMAT_DOUBLE),
+                Schema::string('description'),
+                ProductCategorySchema::ref('category'),
+                Schema::array('attributes')->items(
+                    Schema::object()->properties(
+                        Schema::string('name'),
+                        Schema::string('value')
+                    )
+                )
             );
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
-use App\Http\Resources\CompleteProductResource;
+use App\Http\Resources\ShowProductResource;
 use App\OpenApi\Responses\EmptyCategoriesResponse;
 use Illuminate\Http\Request;
-use App\Http\Resources\AbbreviatedProductResource;
+use App\Http\Resources\ListProductResource;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\OpenApi\Responses\ListProductResponse;
@@ -47,7 +47,7 @@ class ProductApiController extends Controller
                 'message' => $exception->getMessage()
             ], 422);
         }
-        return AbbreviatedProductResource::collection(
+        return ListProductResource::collection(
             $products
         );
     }
@@ -69,7 +69,7 @@ class ProductApiController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        return new CompleteProductResource(
+        return new ShowProductResource(
             $product
         );
     }

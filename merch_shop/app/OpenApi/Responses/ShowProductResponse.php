@@ -2,8 +2,8 @@
 
 namespace App\OpenApi\Responses;
 
-use App\OpenApi\Schemas\AbbreviatedProductSchema;
-use App\OpenApi\Schemas\CompleteProductSchema;
+use App\OpenApi\Schemas\ListProductSchema;
+use App\OpenApi\Schemas\ShowProductSchema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
@@ -15,7 +15,7 @@ class ShowProductResponse extends ResponseFactory
     {
         return Response::ok()->description('Successful response')->content(
             MediaType::json()->schema(Schema::object()->properties(
-                CompleteProductSchema::ref('data')
+                ShowProductSchema::ref('data')
             ))
         );
     }
