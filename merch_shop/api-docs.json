@@ -447,6 +447,16 @@
                     "product"
                 ],
                 "summary": "Display a listing of the resource",
+                "parameters": [
+                    {
+                        "name": "category_slug",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -491,6 +501,16 @@
                     "product"
                 ],
                 "summary": "Display the specified resource",
+                "parameters": [
+                    {
+                        "name": "product_slug",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -600,6 +620,9 @@
                 "type": "object",
                 "properties": {
                     "name": {
+                        "type": "string"
+                    },
+                    "slug": {
                         "type": "string"
                     },
                     "price": {

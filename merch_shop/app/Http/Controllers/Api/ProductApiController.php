@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Web\Controller;
 use App\Http\Resources\ShowProductResource;
+use App\OpenApi\Parameters\ListProductParameters;
+use App\OpenApi\Parameters\ShowProductParameters;
 use App\OpenApi\Responses\EmptyCategoriesResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\ListProductResource;
@@ -24,6 +26,7 @@ class ProductApiController extends Controller
      * @return Responsable
      */
     #[OpenApi\Operation(tags: ['product'])]
+    #[OpenApi\Parameters(factory: ListProductParameters::class)]
     #[OpenApi\Response(factory: ListProductResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: EmptyCategoriesResponse::class, statusCode: 422)]
     public function index(Request $request)
@@ -59,6 +62,7 @@ class ProductApiController extends Controller
      * @return Responsable
      */
     #[OpenApi\Operation(tags: ['product'])]
+    #[OpenApi\Parameters(factory: ShowProductParameters::class)]
     #[OpenApi\Response(factory: ShowProductResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     public function show(Request $request)

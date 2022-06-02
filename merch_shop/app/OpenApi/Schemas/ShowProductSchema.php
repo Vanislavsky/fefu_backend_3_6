@@ -21,6 +21,7 @@ class ShowProductSchema extends SchemaFactory implements Reusable
         return Schema::object('Product')
             ->properties(
                 Schema::string('name'),
+                Schema::string('slug'),
                 Schema::string('price')->format(Schema::FORMAT_DOUBLE),
                 Schema::string('description'),
                 ProductCategorySchema::ref('category'),
