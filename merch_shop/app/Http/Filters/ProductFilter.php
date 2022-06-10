@@ -85,13 +85,13 @@ class ProductFilter
 
             if (count($values) > 0) {
                 $builder
+                    ->whereIn("$key.value", $values)
                     ->join(
-                        "product_attribute_values",
-                        function (JoinClause $clause) use ($attribute, $key, $values): void
+                        "product_attribute_values as $key",
+                        function (JoinClause $clause) use ($attribute, $key): void
                         {
                             $clause->on("$key.product_id", '=', 'products.id')
-                                ->where("$key.product_attribute_id", $attribute->id)
-                                ->whereIn("$key.value", $values);
+                                ->where("$key.product_attribute_id", $attribute->id);
                         });
             }
         }
