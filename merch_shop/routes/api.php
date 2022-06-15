@@ -48,4 +48,4 @@ Route::prefix('catalog')->group(function () {
     Route::get('products/details', [ProductApiController::class, 'show']);
 });
 
-Route::post('/cart/set_quantity', CartApiController::class);
+Route::post('/cart/set_quantity', CartApiController::class)->middleware('auth.optional');
