@@ -18,6 +18,28 @@
             </a>
             <p>{{ $product->price }} руб.</p>
         </article>
+        <script>
+            function addToCart() {
+                const payLoad = {
+                    modifications: [
+                        {
+                            product_id: {{ $product->id }},
+                            quantity: 1,
+                        }
+                    ]
+                }
+                console.log(payLoad)
+
+                fetch("/api/cart/set_quantity", {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payLoad),
+                    method: "POST",
+                })
+            }
+        </script>
+        <button type="button" onclick="addToCart()">Добавить в корзину</button>
     @endforeach
 
     {{ $products->links() }}

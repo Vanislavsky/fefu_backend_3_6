@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AppealApiController;
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\Api\CatalogApiController;
 use App\Http\Controllers\Api\NewsApiController;
 use App\Http\Controllers\Api\PageApiController;
@@ -47,3 +48,4 @@ Route::prefix('catalog')->group(function () {
     Route::get('products/details', [ProductApiController::class, 'show']);
 });
 
+Route::post('/cart/set_quantity', CartApiController::class);
