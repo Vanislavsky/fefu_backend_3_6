@@ -548,6 +548,16 @@
                                 }
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Invalid response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorCartModification"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -660,6 +670,38 @@
                                 "password": {
                                     "type": "string",
                                     "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ErrorCartModification": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "modifications": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "product_id": {
+                                                "type": "integer",
+                                                "nullable": true
+                                            },
+                                            "quantity": {
+                                                "type": "integer",
+                                                "nullable": true
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
