@@ -7,6 +7,7 @@ use App\Http\Requests\CartModificationRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
+use App\OpenApi\RequestBodies\CartModificationRequestBody;
 use App\OpenApi\Responses\CartResponse;
 use App\OpenApi\Responses\ErrorCartModififcationResponse;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ class CartApiController extends Controller
      * @return CartResource
      */
     #[OpenApi\Operation(tags: ['cart'], method: 'post')]
+    #[OpenApi\RequestBody(factory: CartModificationRequestBody::class)]
     #[OpenApi\Response(factory: CartResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: ErrorCartModififcationResponse::class, statusCode: 422)]
     public function __invoke(CartModificationRequest $request)
