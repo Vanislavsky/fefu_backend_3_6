@@ -52,6 +52,10 @@ return [
                     'name' => 'product',
                     'description' => 'Product',
                 ],
+                [
+                    'name' => 'cart',
+                    'description' => 'Cart',
+                ],
 
             ],
 
