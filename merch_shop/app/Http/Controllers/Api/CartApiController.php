@@ -30,7 +30,7 @@ class CartApiController extends Controller
     #[OpenApi\RequestBody(factory: CartModificationRequestBody::class)]
     #[OpenApi\Response(factory: CartResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: ErrorCartModififcationResponse::class, statusCode: 422)]
-    public function __invoke(CartModificationRequest $request)
+    public function setQuantity(CartModificationRequest $request)
     {
         $data = $request->validated('modifications');
 
@@ -46,6 +46,17 @@ class CartApiController extends Controller
 
         $cart->recalculateCart();
         $cart->save();
+
+        return new CartResource($cart);
+    }
+
+    #[OpenApi\Operation(tags: ['cart'], method: 'get')]
+    #[OpenApi\Response(factory: ShowCartResponse::class, statusCode: 200)]
+    public function show()
+    {
+        $user = Auth::user();
+        $session_id = session()->getId();
+        $cart = Cart::getOrCreateCart($user, $session_id);
 
         return new CartResource($cart);
     }

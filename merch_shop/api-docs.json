@@ -618,10 +618,84 @@
                     }
                 }
             }
+        },
+        "\/api\/cart\/show": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "requestBody": {
+                    "description": "Cart modification",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "modifications": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "product_id": {
+                                                    "type": "integer"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ErrorCartModification"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "Address": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string"
+                    },
+                    "street": {
+                        "type": "string"
+                    },
+                    "house": {
+                        "type": "string"
+                    },
+                    "apartment": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                }
+            },
             "Cart": {
                 "type": "object",
                 "properties": {
@@ -765,6 +839,50 @@
                     }
                 }
             },
+            "ErrorOrderData": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "phone": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "city": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "street": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "house": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "apartment": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "Product": {
                 "type": "object",
                 "properties": {
@@ -815,6 +933,26 @@
                     },
                     "text": {
                         "type": "string"
+                    }
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "customer_name": {
+                        "type": "string"
+                    },
+                    "customer_email": {
+                        "type": "string"
+                    },
+                    "delivery_type": {
+                        "type": "integer"
+                    },
+                    "payment_method": {
+                        "type": "integer"
+                    },
+                    "address": {
+                        "$ref": "#\/components\/schemas\/Address"
                     }
                 }
             },
@@ -988,6 +1126,10 @@
         {
             "name": "cart",
             "description": "Cart"
+        },
+        {
+            "name": "order",
+            "description": "Order"
         }
     ]
 }
