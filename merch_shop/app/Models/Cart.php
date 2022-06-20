@@ -34,9 +34,7 @@ class Cart extends Model
         $query = self::query();
         if ($user !== null) {
             $query->where('user_id', $user->id);
-        }
-
-        if ($sessionId !== null) {
+        } elseif ($sessionId !== null) {
             $query->where('session_id', $sessionId);
         }
 
@@ -95,6 +93,13 @@ class Cart extends Model
             $cartItem->price_total = $cartItem->price_item * $cartItem->quantity;
             $this->price_total += $cartItem->price_total;
         }
+    }
+
+    public function isEmpty(): bool
+    {
+        $this->fillItemsByProductId();
+
+        return count($this->itemsByProductId) === 0;
     }
 
     public function save(array $options = []): void
